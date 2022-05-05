@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+	<head>
+	</head>
+	<body>
+		<div class="container">
+			<div class="square"></div>
+			<div class="line"></div>
+			<div class="square"></div>
+			<div class="line"></div>
+			<div class="square"></div>
+			<div class="line"></div>
+			<div class="square"></div>
+		</div>
+		<iframe class= "pdf-viewer" src="/pdf" allowfullscreen allow="fullscreen" webkitallowfullscreen="true"></iframe>
+	</body>
+	<script>
+	window.addEventListener('resize', resetLineWidthPixel)
+	resetLineWidthPixel();
+	function resetLineWidthPixel() {
+		Array.prototype.forEach.call(document.querySelectorAll('.line'), 
+			function(e) {
+				//e.style.width = 2 / window.devicePixelRatio + 'px';
+			}
+		)
+	}
+	</script>
+	<style>
+		.container {
+			display: flex;
+			height: 100px;
+			width: 800px;
+			padding-left: 40px;
+			background-color: gray;
+		}
+		.square {
+			width: 60px;
+			height: 80px;
+			background-color: white;
+		}
+		.line {
+			height: 80px;
+			width: 2px;
+			background-color: green;
+		}
+		.pdf-viewer {
+			width: 100%;
+			height: 80vh;
+		}
+	</style>
+</html>

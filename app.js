@@ -10,6 +10,8 @@ import db from './src/module/dbConnect'
 var dbConnect = new db()
 
 // middleware
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 app.use(validateCookies)
 
 // route

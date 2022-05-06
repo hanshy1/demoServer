@@ -1,28 +1,28 @@
-export default class User {
+import ModelBase from "./ModelBase"
+
+export default class User extends ModelBase {
 
     constructor(dbInstance) {
-        this.db = dbInstance
+        super(dbInstance)
     }
 
     getUser(id, password) {
-        const sqlString = `SELECT * FROM "user" WHERE id='${id}' and password='${password}'`
-        return this.db.query(sqlString)
-            .then(res => {
-                if (res.rows[0]) {
-                    return Promise.resolve(true)
-                }
-                return Promise.resolve(false)
-            })
-            .catch(e => {
-                return Promise.reject(e)
-            })
+        const sqlString = `SELECT * FROM "user" WHERE user_id='${id}' and password='${password}'`
+        return this.executeSQL(sqlString)
+    }
+
+    getUserById(id) {
+        const sqlString = `SELECT * FROM "user" WHERE user_id='${id}'`
+        return this.executeSQL(sqlString)
     }
 
     addUser(id, password) {
-
+        const sqlString = `INSERT INTO "user"(user_id, password, auth, is_deleted) VALUES('${id}', '${password}', null, false)`
+        return this.executeSQL(sqlString)
     }
 
-    updatePassword(id, oldPassword, newPassword) {
-
+    updatePassword(id, newPassword) {
+        const sqlString = `UPDATE "user" SET password='${newPassword}' WHERE user_id='${id}'`
+        return this.executeSQL(sqlString)
     }
 }

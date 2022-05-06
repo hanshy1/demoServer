@@ -15,14 +15,14 @@ export default class DbConnnecter{
         return new Promise((resolve, reject) => {
             this.db.connect(function(err, client, done) {
                 if (err) {
-                    // logger
-                    reject(err)
+                    // logger err.stack
+                    reject(new Error('DBConnectError'))
                 } else {
                     client.query(sqlString, function(err, result) {
                         done()
                         if (err) {
                             // logger
-                            reject(err)
+                            reject(new Error('QueryError'))
                         }
                         resolve(result)
                     })

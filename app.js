@@ -5,16 +5,17 @@ import validateCookies from './middleware/validateCookies'
 import router from './src/module/route'
 import db from './src/module/dbConnect'
 
-// db 
+/** DB conncet pool */
 // sequelize  ORM framework
 var dbConnect = new db()
 
-// middleware
+/** middleware */
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+
 app.use(validateCookies)
 
-// route
+/** router */
 router(app, dbConnect)
 
 app.get('/', function (req, res) {
@@ -39,6 +40,12 @@ app.get('/dbtest', function (req, res) {
 	dbConnect.query('select * from users', function(item) {
 		res.send(JSON.stringify(item.rows[0]))
 	})
+})
+
+// 404 message
+app.get('*', function(req, res) {
+	console.log('404 not found')
+	res.status(404).send(`${req.method} ${req.originalUrl} is not found in server.`)
 })
 
 app.listen(9999)

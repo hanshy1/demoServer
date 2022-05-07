@@ -1,5 +1,6 @@
 export default function(req, res, next) {
-    console.log('Start from ', req.path)
+    console.log('---------------------')
+    console.log('Start with: ', req.originalUrl)
     // do something
     next()
 }

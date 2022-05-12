@@ -40,7 +40,7 @@ export default {
 
     async updateAssignmentIsFinished(db, req, res) {
         const assignment = new Assignment(db)
-        const result = await assignment.updateAssignmentIsFinished(req,body['assignmentId'], req.body['projectId'], req.body['isFinished'])
+        const result = await assignment.updateAssignmentIsFinished(req.body['assignmentId'], req.body['projectId'], req.body['isFinished'])
         if (result.rowCount == 0) {
             throw new Error('QueryError')
         }

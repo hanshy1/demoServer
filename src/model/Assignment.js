@@ -22,12 +22,12 @@ export default class Assignment extends ModelBase {
     }
 
     updateAssignmentIsFinished(assignmentId, projectId, isFinished) {
-        const sqlString = `UPDATE "assignment" SET is_finished=${isFinished} WHERE assignment_id=${assignmentId} AND prject_id=${projectId}`
+        const sqlString = `UPDATE "assignment" SET is_finished=${Boolean(isFinished)} WHERE assignment_id=${Number(assignmentId)} AND project_id=${Number(projectId)}`
         return this.executeSQL(sqlString)
     }
 
     deleteAssignment(assignmentId) {
-        const sqlString = `UPDATE "assignment" SET isdeleted=true WHERE id=${assignmentId}`
+        const sqlString = `DELETE FROM "assignment" WHERE assignment_id=${assignmentId}`
         return this.executeSQL(sqlString)
     }
 }

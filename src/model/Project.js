@@ -7,7 +7,8 @@ export default class Project extends ModelBase {
     }
 
     getProjectsByGroupId(id) {
-        const sqlString = `SELECT * FROM "project" WHERE group_id=${id} AND is_deleted=false`
+        const sqlString = `SELECT a.name as project_name, b.name as assignment_name, * FROM "project" a inner join assignment b on a.project_id = b.project_id WHERE a.group_id=${id} AND a.is_deleted=false AND b.is_deleted=false ORDER BY a.project_id, b.assignment_id ASC`
+        // const sqlString = `SELECT * FROM "project" WHERE group_id=${id} AND is_deleted=false`
         return this.executeSQL(sqlString)
     }
 
